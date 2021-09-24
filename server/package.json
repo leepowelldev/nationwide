@@ -4,7 +4,9 @@
     "prestart": "npm run build",
     "start": "node  dist/server.js",
     "dev": "npm run build && concurrently \"tsc --watch\" \"nodemon dist/server.js\"",
-    "build": "tsc"
+    "prebuild": "rimraf dist",
+    "build": "tsc -p tsconfig.prod.json",
+    "test": "jest"
   },
   "type": "module",
   "dependencies": {
@@ -14,10 +16,14 @@
     "lowdb": "^3.0.0"
   },
   "devDependencies": {
+    "@types/jest": "^27.0.2",
     "@types/node": "^16.9.6",
     "concurrently": "^6.2.1",
+    "jest": "^27.2.1",
     "nodemon": "^2.0.12",
     "prettier": "^2.4.1",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^27.0.5",
     "typescript": "^4.4.3"
   }
 }

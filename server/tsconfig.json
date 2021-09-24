@@ -2,10 +2,11 @@
   "compilerOptions": {
     "target": "ES2020",
     "module": "ESNext",
-    "outDir": "./dist",
     "esModuleInterop": true,
     "strict": true,
-    "moduleResolution": "Node"
+    "moduleResolution": "Node",
+    "types": ["jest", "node"],
+    "noEmit": true
   },
-  "include": ["./src"]
+  "exclude": ["node_modules"]
 }
