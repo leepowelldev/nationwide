@@ -20,6 +20,8 @@ class Property {
 
   static all = () => [];
 
+  static create = () => ({});
+
   static update = (id: string) => ({});
 
   static remove = (id: string) => {

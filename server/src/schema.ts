@@ -19,6 +19,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
+    createProperty(address: String!, type: String!): Property
     updateProperty(id: ID!): Property
     deleteProperty(id: ID!): DeleteResponse
   }
@@ -30,6 +31,7 @@ const resolvers = {
     allProperties: () => Property.all(),
   },
   Mutation: {
+    createProperty: () => Property.create(),
     updateProperty: () => Property.update('1'),
     deleteProperty: () => Property.remove('1'),
   },
