@@ -1,6 +1,6 @@
 import { gql } from 'apollo-server-core';
-import PropertiesDataSource from './propertiesDataSource.js';
-import { PropertyArgs } from './property.js';
+import PropertiesDataSource, { DeletePayload } from './propertiesDataSource.js';
+import Property, { PropertyArgs } from './property.js';
 
 const typeDefs = gql`
   enum PropertyType {
@@ -59,10 +59,18 @@ const resolvers = {
     BUNGALOW: 'bungalow',
   },
   Query: {
-    property: (parent: never, { id }: GetPropertyArgs, context: Context) => {
+    property: (
+      parent: never,
+      { id }: GetPropertyArgs,
+      context: Context
+    ): Property => {
       return context.dataSources.properties.get(id);
     },
-    allProperties: (parent: never, args: never, context: Context) => {
+    allProperties: (
+      parent: never,
+      args: never,
+      context: Context
+    ): Array<Property> => {
       return context.dataSources.properties.all();
     },
   },
@@ -71,21 +79,21 @@ const resolvers = {
       parent: never,
       { input }: CreatePropertyArgs,
       context: Context
-    ) => {
+    ): Property => {
       return context.dataSources.properties.create(input);
     },
     updateProperty: (
       parent: never,
       { id, input }: UpdatePropertyArgs,
       context: Context
-    ) => {
+    ): Property => {
       return context.dataSources.properties.update(id, input);
     },
     deleteProperty: (
       parent: never,
       { id }: DeletePropertyArgs,
       context: Context
-    ) => {
+    ): DeletePayload => {
       return context.dataSources.properties.delete(id);
     },
   },

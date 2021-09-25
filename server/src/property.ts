@@ -26,7 +26,7 @@ const schema = yup.object().shape({
   bedrooms: yup.number().min(1),
 });
 
-const validate = (property: Record<string, any>) =>
+const validate = (property: Record<string, any>): any =>
   schema.validateSync(property);
 
 export default Property;

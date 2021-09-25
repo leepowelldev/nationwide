@@ -1,6 +1,8 @@
 import { DataSource } from 'apollo-datasource';
 import { v4 as uuid } from 'uuid';
-import Property, { PropertyArgs, PropertyType, validate } from './property.js';
+import Property, { PropertyArgs } from './property.js';
+
+type DeletePayload = { result: string; error: null | string };
 
 class PropertiesDataSource extends DataSource {
   private collection: Map<string, Property>;
@@ -26,7 +28,7 @@ class PropertiesDataSource extends DataSource {
     return Array.from(docs);
   }
 
-  create(data: PropertyArgs) {
+  create(data: PropertyArgs): Property {
     const id = uuid();
     const doc = new Property(id, data);
     this.collection.set(id, doc);
@@ -42,7 +44,7 @@ class PropertiesDataSource extends DataSource {
     return doc;
   }
 
-  delete(id: string) {
+  delete(id: string): DeletePayload {
     const isSuccess = this.collection.delete(id);
 
     return !isSuccess
@@ -58,3 +60,4 @@ class PropertiesDataSource extends DataSource {
 }
 
 export default PropertiesDataSource;
+export type { DeletePayload };
