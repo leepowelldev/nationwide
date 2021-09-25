@@ -1,14 +1,28 @@
 import { gql } from 'apollo-server-core';
-import Property from './property.js';
+import PropertiesDataSource from './propertiesDataSource.js';
+import { PropertyArgs } from './property.js';
 
 const typeDefs = gql`
-  type Property {
-    id: ID!
-    address: String
-    type: String
+  enum PropertyType {
+    HOUSE
+    FLAT
+    BUNGALOW
   }
 
-  type DeleteResponse {
+  type Property {
+    id: ID!
+    address: String!
+    type: PropertyType!
+    bedrooms: Int!
+  }
+
+  input PropertyInput {
+    address: String!
+    type: PropertyType!
+    bedrooms: Int!
+  }
+
+  type DeletePayload {
     result: String!
     error: String
   }
@@ -19,21 +33,61 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    createProperty(address: String!, type: String!): Property
-    updateProperty(id: ID!): Property
-    deleteProperty(id: ID!): DeleteResponse
+    createProperty(input: PropertyInput!): Property
+    updateProperty(id: ID!, input: PropertyInput!): Property
+    deleteProperty(id: ID!): DeletePayload
   }
 `;
 
+type Context = {
+  dataSources: {
+    properties: PropertiesDataSource;
+  };
+};
+
+type GetPropertyArgs = { id: string };
+type CreatePropertyArgs = {
+  input: PropertyArgs;
+};
+type UpdatePropertyArgs = { id: string; input: PropertyArgs };
+type DeletePropertyArgs = { id: string };
+
 const resolvers = {
+  PropertyType: {
+    HOUSE: 'house',
+    FLAT: 'flat',
+    BUNGALOW: 'bungalow',
+  },
   Query: {
-    property: () => Property.get('1'),
-    allProperties: () => Property.all(),
+    property: (parent: never, { id }: GetPropertyArgs, context: Context) => {
+      return context.dataSources.properties.get(id);
+    },
+    allProperties: (parent: never, args: never, context: Context) => {
+      return context.dataSources.properties.all();
+    },
   },
   Mutation: {
-    createProperty: () => Property.create(),
-    updateProperty: () => Property.update('1'),
-    deleteProperty: () => Property.remove('1'),
+    createProperty: (
+      parent: never,
+      { input }: CreatePropertyArgs,
+      context: Context
+    ) => {
+      return context.dataSources.properties.create(input);
+    },
+    updateProperty: (
+      parent: never,
+      { id, input }: UpdatePropertyArgs,
+      context: Context
+    ) => {
+      return context.dataSources.properties.update(id, input);
+    },
+    deleteProperty: (
+      parent: never,
+      { id }: DeletePropertyArgs,
+      context: Context
+    ) => {
+      return context.dataSources.properties.delete(id);
+    },
   },
 };
 
