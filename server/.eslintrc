@@ -1,16 +1,21 @@
 {
   "root": true,
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "prettier"],
+  "plugins": ["jest", "@typescript-eslint", "prettier"],
   "extends": [
     "eslint:recommended",
+    "plugin:jest/recommended",
+    "plugin:jest/style",
     "plugin:import/recommended",
     "plugin:import/typescript",
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended"
   ],
   "settings": {
-    "import/resolver": "typescript"
+    "import/resolver": "typescript",
+    "jest": {
+      "version": "27"
+    }
   },
   "reportUnusedDisableDirectives": true,
   "rules": {
