@@ -1,5 +1,4 @@
 import { gql, UserInputError } from 'apollo-server';
-import { ValidationError } from 'yup';
 import PropertiesAPI from './propertiesAPI.js';
 import Property, { PropertyArgs } from './property.js';
 
