@@ -1,17 +1,21 @@
-Stuff to add:
+# Stuff to add:
 
-General
-eslint
-commitizen
-error logging
-lerna
-types could be stronger, using explicit any lots to speed up
+## General
 
-Server
-caching
-probably a better schema!
-better error handling/data validation
-eslint-plugin-graphql
-better database option - mongo/redis/couch
+- eslint
+- commitizen
+- error logging
+- types could be stronger
 
-Client
+## Server
+
+- caching
+- probably a better schema!
+- better error handling/data validation
+- eslint-plugin-graphql
+- better database option - mongo/redis/couch
+- error logging
+- debugging
+- ...lots more
+
+## Client
