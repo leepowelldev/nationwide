@@ -1,9 +1,6 @@
 export default {
   preset: 'ts-jest',
+  resolver: 'ts-jest-resolver',
   testEnvironment: 'node',
-  globals: {
-    'ts-jest': {
-      tsconfig: 'tsconfig.json',
-    },
-  },
+  testPathIgnorePatterns: ['/__utils__/'],
 };

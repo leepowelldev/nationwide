@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Mutation: updateProperty should error when property address is too short (yup schema) 1`] = `"{\\"message\\":\\"address must be at least 10 characters\\",\\"locations\\":[{\\"line\\":2,\\"column\\":3}],\\"path\\":[\\"updateProperty\\"],\\"extensions\\":{\\"code\\":\\"BAD_USER_INPUT\\"}}"`;
+
+exports[`Mutation: updateProperty should error when property address is too short (yup schema) 2`] = `
+Object {
+  "data": Object {
+    "updateProperty": null,
+  },
+  "errors": Array [
+    [GraphQLError: address must be at least 10 characters],
+  ],
+  "extensions": undefined,
+  "http": Object {
+    "headers": Headers {
+      Symbol(map): Object {},
+    },
+  },
+}
+`;
+
+exports[`Mutation: updateProperty should error when property does not exist 1`] = `"{\\"message\\":\\"property with id 2 does not exist\\",\\"locations\\":[{\\"line\\":2,\\"column\\":3}],\\"path\\":[\\"updateProperty\\"],\\"extensions\\":{\\"code\\":\\"NOT_FOUND\\"}}"`;
+
+exports[`Mutation: updateProperty should error when property does not exist 2`] = `
+Object {
+  "data": Object {
+    "updateProperty": null,
+  },
+  "errors": Array [
+    [GraphQLError: property with id 2 does not exist],
+  ],
+  "extensions": undefined,
+  "http": Object {
+    "headers": Headers {
+      Symbol(map): Object {},
+    },
+  },
+}
+`;
+
+exports[`Mutation: updateProperty should error when property input is missing field (internal) 1`] = `"{\\"message\\":\\"Variable \\\\\\"$input\\\\\\" got invalid value { address: \\\\\\"A house somewhere\\\\\\", bedrooms: 3 }; Field \\\\\\"type\\\\\\" of required type \\\\\\"PropertyType!\\\\\\" was not provided.\\",\\"locations\\":[{\\"line\\":1,\\"column\\":21}],\\"extensions\\":{\\"code\\":\\"BAD_USER_INPUT\\"}}"`;
+
+exports[`Mutation: updateProperty should error when property input is missing field (internal) 2`] = `
+Object {
+  "data": undefined,
+  "errors": Array [
+    [UserInputError: Variable "$input" got invalid value { address: "A house somewhere", bedrooms: 3 }; Field "type" of required type "PropertyType!" was not provided.],
+  ],
+  "extensions": undefined,
+  "http": Object {
+    "headers": Headers {
+      Symbol(map): Object {},
+    },
+  },
+}
+`;
+
+exports[`Mutation: updateProperty should update property 1`] = `
+Object {
+  "data": Object {
+    "updateProperty": Object {
+      "address": "A house somewhere",
+      "bedrooms": 3,
+      "id": "1",
+      "type": "HOUSE",
+    },
+  },
+  "errors": undefined,
+  "extensions": undefined,
+  "http": Object {
+    "headers": Headers {
+      Symbol(map): Object {},
+    },
+  },
+}
+`;

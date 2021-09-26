@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Query: allProperties should return array of properties 1`] = `
+Object {
+  "data": Object {
+    "allProperties": Array [
+      Object {
+        "address": "A test address",
+        "bedrooms": 4,
+        "id": "1",
+        "type": "HOUSE",
+      },
+    ],
+  },
+  "errors": undefined,
+  "extensions": undefined,
+  "http": Object {
+    "headers": Headers {
+      Symbol(map): Object {},
+    },
+  },
+}
+`;
+
+exports[`Query: allProperties should return empty array when no properties exist 1`] = `
+Object {
+  "data": Object {
+    "allProperties": Array [],
+  },
+  "errors": undefined,
+  "extensions": undefined,
+  "http": Object {
+    "headers": Headers {
+      Symbol(map): Object {},
+    },
+  },
+}
+`;

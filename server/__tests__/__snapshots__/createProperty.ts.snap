@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Mutation: createProperty should create property 1`] = `
+Object {
+  "data": Object {
+    "createProperty": Object {
+      "address": "A house somewhere",
+      "bedrooms": 3,
+      "id": "da0aba75-3744-4699-b166-5be2c8f75636",
+      "type": "HOUSE",
+    },
+  },
+  "errors": undefined,
+  "extensions": undefined,
+  "http": Object {
+    "headers": Headers {
+      Symbol(map): Object {},
+    },
+  },
+}
+`;
+
+exports[`Mutation: createProperty should error when property address is too short (yup schema) 1`] = `"{\\"message\\":\\"address must be at least 10 characters\\",\\"locations\\":[{\\"line\\":2,\\"column\\":3}],\\"path\\":[\\"createProperty\\"],\\"extensions\\":{\\"code\\":\\"BAD_USER_INPUT\\"}}"`;
+
+exports[`Mutation: createProperty should error when property address is too short (yup schema) 2`] = `
+Object {
+  "data": Object {
+    "createProperty": null,
+  },
+  "errors": Array [
+    [GraphQLError: address must be at least 10 characters],
+  ],
+  "extensions": undefined,
+  "http": Object {
+    "headers": Headers {
+      Symbol(map): Object {},
+    },
+  },
+}
+`;
+
+exports[`Mutation: createProperty should error when property input is missing field (internal) 1`] = `"{\\"message\\":\\"Variable \\\\\\"$input\\\\\\" got invalid value { address: \\\\\\"A house somewhere\\\\\\", bedrooms: 3 }; Field \\\\\\"type\\\\\\" of required type \\\\\\"PropertyType!\\\\\\" was not provided.\\",\\"locations\\":[{\\"line\\":1,\\"column\\":11}],\\"extensions\\":{\\"code\\":\\"BAD_USER_INPUT\\"}}"`;
+
+exports[`Mutation: createProperty should error when property input is missing field (internal) 2`] = `
+Object {
+  "data": undefined,
+  "errors": Array [
+    [UserInputError: Variable "$input" got invalid value { address: "A house somewhere", bedrooms: 3 }; Field "type" of required type "PropertyType!" was not provided.],
+  ],
+  "extensions": undefined,
+  "http": Object {
+    "headers": Headers {
+      Symbol(map): Object {},
+    },
+  },
+}
+`;
