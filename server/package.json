@@ -1,15 +1,14 @@
 {
   "name": "nationwide.server",
   "scripts": {
-    "prestart": "npm run build",
-    "start": "NODE_ENV=production node --require dotenv/config dist/server.js",
+    "start": "npm run build && NODE_ENV=production node --require dotenv/config dist/server.js",
     "dev": "npm run build && concurrently \"tsc --watch -p tsconfig.prod.json\" \"nodemon --require dotenv/config --ignore data.json dist/server.js\"",
-    "prebuild": "rimraf dist",
-    "build": "tsc -p tsconfig.prod.json",
+    "build": "rimraf dist && tsc -p tsconfig.prod.json",
     "test": "jest",
     "test:coverage": "npm run test -- --coverage",
     "lint": "eslint .",
-    "lint:fix": "npm run lint -- --fix"
+    "lint:fix": "npm run lint -- --fix",
+    "format": "prettier --ignore-unknown --write ."
   },
   "type": "module",
   "dependencies": {
@@ -40,6 +39,7 @@
     "rimraf": "^3.0.2",
     "ts-jest": "^27.0.5",
     "ts-jest-resolver": "^1.1.0",
-    "typescript": "^4.4.3"
+    "typescript": "^4.4.3",
+    "prettier": "^2.4.1"
   }
 }
