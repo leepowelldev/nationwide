@@ -95,11 +95,8 @@ function validateInput(input: PropertyArgs) {
   try {
     Property.validate(input);
   } catch (error: any) {
-    if (error instanceof ValidationError) {
-      throw new UserInputError(error.message);
-    }
-    // Unknown error
-    throw error;
+    // Convert Yup ValidationError to Apollo friendly error
+    throw new UserInputError(error.message);
   }
 }
 
