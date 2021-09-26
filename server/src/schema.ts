@@ -1,6 +1,20 @@
-import { gql } from 'apollo-server-core';
-import PropertiesDataSource, { DeletePayload } from './propertiesDataSource.js';
+import { gql, UserInputError } from 'apollo-server';
+import { ValidationError } from 'yup';
+import PropertiesAPI from './propertiesAPI.js';
 import Property, { PropertyArgs } from './property.js';
+
+type IdArg = { id: string };
+type InputArg = { input: PropertyArgs };
+type GetPropertyArgs = IdArg;
+type CreatePropertyArgs = InputArg;
+type UpdatePropertyArgs = IdArg & InputArg;
+type DeletePropertyArgs = IdArg;
+
+type Context = {
+  dataSources: {
+    properties: PropertiesAPI;
+  };
+};
 
 const typeDefs = gql`
   enum PropertyType {
@@ -22,35 +36,17 @@ const typeDefs = gql`
     bedrooms: Int!
   }
 
-  type DeletePayload {
-    result: String!
-    error: String
-  }
-
   type Query {
-    property(id: ID!): Property
+    getProperty(id: ID!): Property
     allProperties: [Property]
   }
 
   type Mutation {
     createProperty(input: PropertyInput!): Property
     updateProperty(id: ID!, input: PropertyInput!): Property
-    deleteProperty(id: ID!): DeletePayload
+    deleteProperty(id: ID!): ID!
   }
 `;
-
-type Context = {
-  dataSources: {
-    properties: PropertiesDataSource;
-  };
-};
-
-type GetPropertyArgs = { id: string };
-type CreatePropertyArgs = {
-  input: PropertyArgs;
-};
-type UpdatePropertyArgs = { id: string; input: PropertyArgs };
-type DeletePropertyArgs = { id: string };
 
 const resolvers = {
   PropertyType: {
@@ -59,20 +55,16 @@ const resolvers = {
     BUNGALOW: 'bungalow',
   },
   Query: {
-    property: (
+    getProperty: (
       parent: never,
       { id }: GetPropertyArgs,
       context: Context
-    ): Property => {
-      return context.dataSources.properties.get(id);
-    },
+    ): Property => context.dataSources.properties.get(id),
     allProperties: (
       parent: never,
       args: never,
       context: Context
-    ): Array<Property> => {
-      return context.dataSources.properties.all();
-    },
+    ): Array<Property> => context.dataSources.properties.all(),
   },
   Mutation: {
     createProperty: (
@@ -80,6 +72,7 @@ const resolvers = {
       { input }: CreatePropertyArgs,
       context: Context
     ): Property => {
+      validateInput(input);
       return context.dataSources.properties.create(input);
     },
     updateProperty: (
@@ -87,16 +80,27 @@ const resolvers = {
       { id, input }: UpdatePropertyArgs,
       context: Context
     ): Property => {
+      validateInput(input);
       return context.dataSources.properties.update(id, input);
     },
     deleteProperty: (
       parent: never,
       { id }: DeletePropertyArgs,
       context: Context
-    ): DeletePayload => {
-      return context.dataSources.properties.delete(id);
-    },
+    ): string => context.dataSources.properties.delete(id),
   },
 };
+
+function validateInput(input: PropertyArgs) {
+  try {
+    Property.validate(input);
+  } catch (error: any) {
+    if (error instanceof ValidationError) {
+      throw new UserInputError(error.message);
+    }
+    // Unknown error
+    throw error;
+  }
+}
 
 export { typeDefs, resolvers };

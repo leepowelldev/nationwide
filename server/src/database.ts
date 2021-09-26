@@ -1,10 +1,15 @@
 import { Low, Memory } from 'lowdb';
+import Property from './property.js';
 
-type Data = Record<string, any>;
+type Data = {
+  properties: Map<string, Property>;
+};
 
 const adapter = new Memory<Data>();
 const database = new Low<Data>(adapter);
 
-database.data = {};
+await database.read();
+
+database.data ||= { properties: new Map() };
 
 export default database;

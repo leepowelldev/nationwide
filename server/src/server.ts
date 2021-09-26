@@ -1,22 +1,28 @@
 import { ApolloServer } from 'apollo-server';
 import { typeDefs, resolvers } from './schema.js';
-import PropertiesDataSource from './propertiesDataSource.js';
+import PropertiesAPI from './propertiesAPI.js';
 import database from './database.js';
-import Property from './property.js';
-
-// Properties data collection
-if (database.data) {
-  database.data.properties = new Map<string, Property>();
-}
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  dataSources: () => ({
-    properties: new PropertiesDataSource(database.data?.properties),
-  }),
+  dataSources: () => {
+    if (database.data === null) {
+      console.log('Database data not found');
+      process.exit(1);
+    }
+
+    return {
+      properties: new PropertiesAPI(database.data.properties),
+    };
+  },
+  cors: {
+    origin: '*',
+  },
 });
 
-server.listen().then(({ url }) => {
-  console.log(`🚀 Server ready at ${url}`);
+const { url } = await server.listen({
+  port: process.env.PORT || 4000,
 });
+
+console.log(`🚀 Server ready at ${url}`);

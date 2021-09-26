@@ -1,10 +1,9 @@
 import { DataSource } from 'apollo-datasource';
 import { v4 as uuid } from 'uuid';
+import { NotFoundError } from './errors.js';
 import Property, { PropertyArgs } from './property.js';
 
-type DeletePayload = { result: string; error: null | string };
-
-class PropertiesDataSource extends DataSource {
+class PropertiesAPI extends DataSource {
   private collection: Map<string, Property>;
 
   constructor(collection: Map<string, Property>) {
@@ -15,49 +14,39 @@ class PropertiesDataSource extends DataSource {
   get(id: string): Property {
     const doc = this.collection.get(id);
     if (!doc) {
-      throw new Error('Not found');
+      throw new NotFoundError(`property with id ${id} does not exist`);
     }
     return doc;
   }
 
   all(): Array<Property> {
-    const docs = this.collection.values();
-    if (!docs) {
-      throw new Error('Not found');
-    }
-    return Array.from(docs);
+    return Array.from(this.collection.values());
   }
 
   create(data: PropertyArgs): Property {
     const id = uuid();
     const doc = new Property(id, data);
+    // TODO check id doesn't already exist - unlikely
     this.collection.set(id, doc);
     return doc;
   }
 
   update(id: string, data: PropertyArgs): Property {
     if (!this.collection.get(id)) {
-      throw new Error('Not found');
+      throw new NotFoundError(`property with id ${id} does not exist`);
     }
     const doc = new Property(id, data);
     this.collection.set(id, doc);
     return doc;
   }
 
-  delete(id: string): DeletePayload {
-    const isSuccess = this.collection.delete(id);
-
-    return !isSuccess
-      ? {
-          result: 'error',
-          error: 'Not found',
-        }
-      : {
-          result: 'success',
-          error: null,
-        };
+  delete(id: string): string {
+    if (!this.collection.get(id)) {
+      throw new NotFoundError(`property with id ${id} does not exist`);
+    }
+    this.collection.delete(id);
+    return id;
   }
 }
 
-export default PropertiesDataSource;
-export type { DeletePayload };
+export default PropertiesAPI;
