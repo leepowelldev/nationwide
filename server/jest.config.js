@@ -3,4 +3,5 @@ export default {
   resolver: 'ts-jest-resolver',
   testEnvironment: 'node',
   testPathIgnorePatterns: ['/__utils__/'],
+  clearAllMocks: true,
 };

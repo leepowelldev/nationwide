@@ -2,6 +2,10 @@ import { gql } from 'apollo-server';
 import { mockEmptyCollection } from './__utils__/mockCollections.js';
 import setup from './__utils__/setup.js';
 
+jest.mock('uuid', () => ({
+  v4: jest.fn(() => 'XXXXX-XXXXX-XXXXX'),
+}));
+
 const query = gql`
   mutation ($input: PropertyInput!) {
     createProperty(input: $input) {
