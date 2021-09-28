@@ -1,7 +1,7 @@
 import { ApolloError } from 'apollo-server';
 
 class NotFoundError extends ApolloError {
-  constructor(message: string) {
+  constructor(message = 'Not found') {
     super(message, 'NOT_FOUND');
   }
 }

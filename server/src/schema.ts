@@ -1,17 +1,13 @@
-import { gql, UserInputError } from 'apollo-server';
-import PropertiesAPI from './propertiesAPI.js';
-import Property, { PropertyArgs } from './property.js';
+import { gql } from 'apollo-server';
+import { PropertiesDataSource } from './propertiesDataSource';
+import { PropertyDocument, PropertyFields } from './types';
 
 type IdArg = { id: string };
-type InputArg = { input: PropertyArgs };
-type GetPropertyArgs = IdArg;
-type CreatePropertyArgs = InputArg;
-type UpdatePropertyArgs = IdArg & InputArg;
-type DeletePropertyArgs = IdArg;
+type InputArg = { input: PropertyFields };
 
 type Context = {
   dataSources: {
-    properties: PropertiesAPI;
+    properties: PropertiesDataSource;
   };
 };
 
@@ -22,8 +18,8 @@ const typeDefs = gql`
     BUNGALOW
   }
 
-  type Property {
-    id: ID!
+  type PropertyDocument {
+    _id: ID!
     address: String!
     type: PropertyType!
     bedrooms: Int!
@@ -36,14 +32,14 @@ const typeDefs = gql`
   }
 
   type Query {
-    getProperty(id: ID!): Property
-    allProperties: [Property]
+    getProperty(id: ID!): PropertyDocument
+    allProperties: [PropertyDocument]
   }
 
   type Mutation {
-    createProperty(input: PropertyInput!): Property
-    updateProperty(id: ID!, input: PropertyInput!): Property
-    deleteProperty(id: ID!): ID!
+    createProperty(input: PropertyInput!): PropertyDocument
+    updateProperty(id: ID!, input: PropertyInput!): PropertyDocument
+    deleteProperty(id: ID!): String
   }
 `;
 
@@ -56,47 +52,37 @@ const resolvers = {
   Query: {
     getProperty: (
       parent: never,
-      { id }: GetPropertyArgs,
+      { id }: IdArg,
       context: Context
-    ): Property => context.dataSources.properties.get(id),
+    ): Promise<PropertyDocument | null> =>
+      context.dataSources.properties.get(id),
     allProperties: (
       parent: never,
       args: never,
       context: Context
-    ): Array<Property> => context.dataSources.properties.all(),
+    ): Promise<Array<PropertyDocument>> => context.dataSources.properties.all(),
   },
   Mutation: {
     createProperty: (
       parent: never,
-      { input }: CreatePropertyArgs,
+      { input }: InputArg,
       context: Context
-    ): Property => {
-      validateInput(input);
+    ): Promise<PropertyDocument> => {
       return context.dataSources.properties.create(input);
     },
     updateProperty: (
       parent: never,
-      { id, input }: UpdatePropertyArgs,
+      { id, input }: IdArg & InputArg,
       context: Context
-    ): Property => {
-      validateInput(input);
+    ): Promise<PropertyDocument | null> => {
       return context.dataSources.properties.update(id, input);
     },
     deleteProperty: (
       parent: never,
-      { id }: DeletePropertyArgs,
+      { id }: IdArg,
       context: Context
-    ): string => context.dataSources.properties.delete(id),
+    ): Promise<string> => context.dataSources.properties.delete(id),
   },
 };
-
-function validateInput(input: PropertyArgs) {
-  try {
-    Property.validate(input);
-  } catch (error: any) {
-    // Convert Yup ValidationError to Apollo friendly error
-    throw new UserInputError(error.message);
-  }
-}
 
 export { typeDefs, resolvers };
