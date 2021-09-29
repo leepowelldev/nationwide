@@ -1,13 +1,25 @@
 import { VFC } from 'react';
-import { ErrorBoundary } from 'react-error-boundary';
-import ErrorFallback from './components/ErrorFallback.js';
+import { Route, Switch } from 'react-router-dom';
+import { CreatePage, EditPage, HomePage, NotFoundPage } from './routes';
+import './styles/global.css';
 
 const App: VFC = () => {
   return (
-    <ErrorBoundary FallbackComponent={ErrorFallback}>
-      <div>Hello world</div>
-    </ErrorBoundary>
+    <Switch>
+      <Route exact path="/">
+        <HomePage />
+      </Route>
+      <Route exact path="/create">
+        <CreatePage />
+      </Route>
+      <Route exact path="/edit/:id">
+        <EditPage />
+      </Route>
+      <Route path="*">
+        <NotFoundPage />
+      </Route>
+    </Switch>
   );
 };
 
-export default App;
+export { App };

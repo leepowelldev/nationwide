@@ -1,10 +1,25 @@
 import { StrictMode } from 'react';
 import { render } from 'react-dom';
-import App from './App.js';
+import { ErrorBoundary } from 'react-error-boundary';
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { ErrorFallback } from './components/ErrorFallback';
+import { App } from './App';
+import { BrowserRouter } from 'react-router-dom';
+
+const client = new ApolloClient({
+  uri: import.meta.env.VITE_GRAPHQL_SERVER_URL as string,
+  cache: new InMemoryCache(),
+});
 
 render(
   <StrictMode>
-    <App />
+    <ErrorBoundary FallbackComponent={ErrorFallback}>
+      <ApolloProvider client={client}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ApolloProvider>
+    </ErrorBoundary>
   </StrictMode>,
   document.getElementById('root')
 );

@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .h-4px {
+    height: 4px;
+  }
+
+  .flex-full {
+    flex-basis: 100%;
+  }
+
+  .flex-auto {
+    flex-basis: auto;
+  }
+
+  .max-w-xxs {
+    max-width: 13rem;
+  }
+}
+
+/**
+ * Global
+ */
+
+body {
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+}
+
+.logo {
+  @apply max-w-xxs;
+}
+
+/**
+ * Add Property Button
+ */
+
+.add-property {
+  @apply fixed;
+  @apply bottom-4;
+  @apply right-4;
+}
+
+/**
+ * Property
+ */
+
+.property-wrapper {
+  @apply py-5;
+  @apply flex-wrap;
+  @apply flex-full;
+}
+
+.property {
+  @apply flex-grow;
+}
+
+.property__controls {
+  @apply mt-5;
+  @apply sm:flex;
+  @apply sm:justify-between;
+}
+
+.property_control-wrapper--last {
+  @apply mt-3;
+  @apply sm:mt-0;
+}
+
+/**
+ * Form
+ */
+
+.form-field {
+  @apply mb-8;
+}
+
+.form-field--half {
+  @apply sm:w-6/12;
+}
+
+.form-field--first {
+  @apply sm:pr-3;
+}
+
+.form-field--last {
+  @apply sm:pl-3;
+}
+
+.form-controls {
+  @apply sm:flex;
+  @apply sm:justify-between;
+  @apply mt-10;
+  @apply sm:mt-0;
+}
