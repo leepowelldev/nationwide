@@ -4,8 +4,13 @@ module.exports = {
   testEnvironment: 'jsdom',
   testPathIgnorePatterns: ['/__utils__/'],
   clearMocks: true,
+  transform: {
+    '.+\\.(svg|css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$':
+      'jest-transform-stub',
+  },
   moduleNameMapper: {
-    '\\.(css|sass|scss)$': 'identity-obj-proxy',
+    '^.+.(svg|css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$':
+      'jest-transform-stub',
   },
   setupFilesAfterEnv: ['./jest.setup.js'],
 };
