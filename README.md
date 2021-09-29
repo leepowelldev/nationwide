@@ -1,5 +1,22 @@
 # Nationwide Property App
 
+## Stack
+
+### Server
+
+- apollo-server
+- mongodb
+- mongoose
+
+### Client
+
+- vite
+- apollo-client
+- tailwind
+- react
+- material-ui
+- formik
+
 ## Requirements
 
 - Docker (or Mongodb installed on local machine)
@@ -64,3 +81,7 @@ npm start
 - error logging
 - debugging
 - optimisation/lazy loading/code splitting etc.
+
+## To do
+
+- client app tests
