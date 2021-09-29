@@ -1,7 +1,10 @@
 module.exports = {
   preset: 'ts-jest',
   resolver: 'ts-jest-resolver',
-  testEnvironment: 'node',
+  testEnvironment: 'jsdom',
   testPathIgnorePatterns: ['/__utils__/'],
   clearMocks: true,
+  moduleNameMapper: {
+    '\\.(css|sass|scss)$': 'identity-obj-proxy',
+  },
 };

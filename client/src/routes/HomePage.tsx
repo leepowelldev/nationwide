@@ -44,16 +44,7 @@ const HomePage: VFC = () => {
         }
 
         if (error) {
-          const message = <div>Error loading properties.</div>;
-          if (import.meta.env.DEV) {
-            return (
-              <>
-                {message}
-                <div>{JSON.stringify(error)}</div>
-              </>
-            );
-          }
-          return message;
+          return <div>Error loading properties.</div>;
         }
 
         return (
