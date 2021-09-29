@@ -10,7 +10,7 @@ describe('ErrorFallback Component', () => {
     expect(screen.getByRole('alert')).toBeInTheDocument();
   });
 
-  test('it renders error message', () => {
+  test('error prop: it renders error message', () => {
     render(
       <ErrorFallback
         error={new Error('Test message')}

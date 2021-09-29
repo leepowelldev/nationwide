@@ -12,7 +12,7 @@ describe('AddPropertyButton Component', () => {
     ).toBeInTheDocument();
   });
 
-  test('it calls onClick handler when clicked', () => {
+  test('onClick prop: it calls onClick handler when clicked', () => {
     const spy = jest.fn();
 
     render(<AddPropertyButton onClick={spy} />);
