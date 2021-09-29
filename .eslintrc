@@ -7,6 +7,7 @@
   },
   "extends": [
     "eslint:recommended",
+    "plugin:react/recommended",
     "plugin:jest/recommended",
     "plugin:jest/style",
     "plugin:import/recommended",
@@ -16,12 +17,17 @@
   ],
   "settings": {
     "import/resolver": "typescript",
-    "jest": {
-      "version": "27"
+    "react": {
+      "version": "detect"
     }
   },
   "reportUnusedDisableDirectives": true,
   "rules": {
-    "@typescript-eslint/no-explicit-any": "off"
+    "sort-imports": ["error", { "ignoreDeclarationSort": true }],
+    "@typescript-eslint/no-explicit-any": "off",
+    "react/prop-types": "off",
+    // Vite injects React into scope at compile
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-sort-props": "error"
   }
 }

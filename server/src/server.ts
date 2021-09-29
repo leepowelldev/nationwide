@@ -1,6 +1,6 @@
 import { ApolloServer } from 'apollo-server';
 import { Collection } from 'apollo-datasource-mongodb';
-import { typeDefs, resolvers } from './schema';
+import { resolvers, typeDefs } from './schema';
 import { PropertiesDataSource } from './propertiesDataSource';
 import { Property } from './propertyModel';
 import { PropertyDocument } from './types';

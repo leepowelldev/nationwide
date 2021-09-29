@@ -1,11 +1,11 @@
 import { ApolloServer, gql } from 'apollo-server';
 import { PropertyFields } from '../src/types';
 import {
-  connectDatabase,
-  closeDatabase,
-  clearDatabase,
-  createApolloServer,
   addPropertiesToDatabase,
+  clearDatabase,
+  closeDatabase,
+  connectDatabase,
+  createApolloServer,
   resetIdIncrement,
 } from './__utils__/utils';
 

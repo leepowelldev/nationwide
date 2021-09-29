@@ -1,9 +1,9 @@
 import { ApolloServer, gql } from 'apollo-server';
 import { Property } from '../src/propertyModel';
 import {
-  connectDatabase,
-  closeDatabase,
   clearDatabase,
+  closeDatabase,
+  connectDatabase,
   createApolloServer,
   resetIdIncrement,
 } from './__utils__/utils';

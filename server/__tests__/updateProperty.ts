@@ -2,12 +2,12 @@ import { ApolloServer, gql } from 'apollo-server';
 import { Property } from '../src/propertyModel';
 import { PropertyFields } from '../src/types';
 import {
-  connectDatabase,
-  closeDatabase,
+  addPropertiesToDatabase,
   clearDatabase,
+  closeDatabase,
+  connectDatabase,
   createApolloServer,
   resetIdIncrement,
-  addPropertiesToDatabase,
 } from './__utils__/utils';
 
 const query = gql`
