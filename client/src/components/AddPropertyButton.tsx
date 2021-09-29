@@ -8,8 +8,9 @@ type Props = {
 
 const AddPropertyButton: VFC<Props> = ({ onClick }) => (
   <div className="add-property">
-    <Fab aria-label="Add property" color="primary" onClick={onClick}>
+    <Fab color="primary" onClick={onClick}>
       <Add />
+      <div className="sr-only">Add property</div>
     </Fab>
   </div>
 );
