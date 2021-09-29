@@ -14,10 +14,10 @@ const PropertyList: VFC<Props> = ({ properties = [] }) => {
 
   return (
     <List>
-      {properties.map((property) => (
-        <ListItem divider key={property._id}>
+      {properties.map(({ _id: id, ...props }) => (
+        <ListItem divider key={id}>
           <div className="property-wrapper">
-            <Property {...property} />
+            <Property {...props} id={id} />
           </div>
         </ListItem>
       ))}
@@ -26,3 +26,4 @@ const PropertyList: VFC<Props> = ({ properties = [] }) => {
 };
 
 export { PropertyList };
+export type { Props as PropertyListProps };

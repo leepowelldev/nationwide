@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 import { MongoDataSource } from 'apollo-datasource-mongodb';
+import { UserInputError } from 'apollo-server-errors';
 import { PropertyDocument, PropertyFields } from './types';
 import { Property } from './propertyModel';
-import { UserInputError } from 'apollo-server-errors';
 import { NotFoundError } from './errors';
 
 class PropertiesDataSource extends MongoDataSource<PropertyDocument> {

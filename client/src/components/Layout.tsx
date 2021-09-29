@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { Container, LinearProgress } from '@mui/material';
 import { Helmet } from 'react-helmet';
-import { LinearProgressPlaceholder } from './LinearProgressPlaceholder';
 import logo from '../logo.svg';
+import { LinearProgressPlaceholder } from './LinearProgressPlaceholder';
 
 type Props = {
   showGlobalLoading?: boolean;
@@ -21,3 +21,4 @@ const Layout: FC<Props> = ({ children, showGlobalLoading = false }) => (
 );
 
 export { Layout };
+export type { Props as LayoutProps };

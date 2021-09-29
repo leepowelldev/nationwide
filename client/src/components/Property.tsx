@@ -6,15 +6,15 @@ import { Link } from 'react-router-dom';
 import { DELETE_PROPERTY } from '../queries';
 import { PropertyDocument } from '../types';
 
-type Props = PropertyDocument;
+type Props = { id: string } & Omit<PropertyDocument, '_id'>;
 
-const Property: VFC<Props> = ({ _id, address, type, bedrooms }) => {
+const Property: VFC<Props> = ({ id, address, type, bedrooms }) => {
   const [deleteProperty, { error, loading }] = useMutation(DELETE_PROPERTY, {
     refetchQueries: ['AllProperties'],
   });
 
   const handleDelete: MouseEventHandler<HTMLButtonElement> = () => {
-    deleteProperty({ variables: { id: _id } });
+    deleteProperty({ variables: { id } });
   };
 
   const errorMessage = (
@@ -46,7 +46,7 @@ const Property: VFC<Props> = ({ _id, address, type, bedrooms }) => {
           </Button>
         </div>
         <div className="property_control-wrapper property_control-wrapper--last">
-          <Link to={`/edit/${_id}`}>
+          <Link to={`/edit/${id}`}>
             <Button
               className="property__control"
               component={'span'}

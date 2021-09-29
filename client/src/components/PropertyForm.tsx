@@ -248,3 +248,4 @@ const BedroomsField: FieldComponent = () => {
 };
 
 export { PropertyForm };
+export type { Props as PropertyFormProps };

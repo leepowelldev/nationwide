@@ -16,3 +16,4 @@ const AddPropertyButton: VFC<Props> = ({ onClick }) => (
 );
 
 export { AddPropertyButton };
+export type { Props as AddPropertyButtonProps };
