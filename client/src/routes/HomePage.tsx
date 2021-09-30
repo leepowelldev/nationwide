@@ -1,4 +1,3 @@
-import { MouseEventHandler, VFC } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { useQuery } from '@apollo/client';
@@ -6,7 +5,8 @@ import { AddPropertyButton } from '../components/AddPropertyButton';
 import { Layout } from '../components/Layout';
 import { PropertyList } from '../components/PropertyList';
 import { ALL_PROPERTIES } from '../queries';
-import { PropertyDocument } from '../types';
+import type { MouseEventHandler, VFC } from 'react';
+import type { PropertyDocument } from '../types';
 
 type Data = {
   allProperties: Array<PropertyDocument>;

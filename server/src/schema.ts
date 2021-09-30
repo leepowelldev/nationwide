@@ -1,6 +1,6 @@
 import { gql } from 'apollo-server';
-import { PropertiesDataSource } from './propertiesDataSource';
-import { PropertyDocument, PropertyFields } from './types';
+import type { PropertiesDataSource } from './propertiesDataSource';
+import type { PropertyDocument, PropertyFields } from './types';
 
 type IdArg = { id: string };
 type InputArg = { input: PropertyFields };

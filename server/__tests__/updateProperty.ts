@@ -1,6 +1,5 @@
-import { ApolloServer, gql } from 'apollo-server';
+import { gql } from 'apollo-server';
 import { Property } from '../src/propertyModel';
-import { PropertyFields } from '../src/types';
 import {
   addPropertiesToDatabase,
   clearDatabase,
@@ -9,6 +8,8 @@ import {
   createApolloServer,
   resetIdIncrement,
 } from './__utils__/utils';
+import type { PropertyFields } from '../src/types';
+import type { ApolloServer } from 'apollo-server';
 
 const query = gql`
   mutation ($id: ID!, $input: PropertyInput!) {

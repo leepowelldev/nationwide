@@ -1,4 +1,5 @@
-import mongoose, { Mongoose } from 'mongoose';
+import mongoose from 'mongoose';
+import type { Mongoose } from 'mongoose';
 
 const url = process.env.MONGO_URL || 'mongodb://localhost:27017/';
 const user = process.env.MONGO_USER;

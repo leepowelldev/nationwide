@@ -1,10 +1,10 @@
 import { useMutation } from '@apollo/client';
 import { Delete, Edit, ErrorOutline } from '@mui/icons-material';
 import { Button, LinearProgress } from '@mui/material';
-import { MouseEventHandler, VFC } from 'react';
 import { Link } from 'react-router-dom';
 import { DELETE_PROPERTY } from '../queries';
-import { PropertyDocument } from '../types';
+import type { MouseEventHandler, VFC } from 'react';
+import type { PropertyDocument } from '../types';
 
 type Props = { id: string } & Omit<PropertyDocument, '_id'>;
 

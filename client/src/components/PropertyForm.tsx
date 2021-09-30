@@ -6,10 +6,11 @@ import {
   Select,
   TextField,
 } from '@mui/material';
-import { ErrorMessage, Field, FieldProps, Form, Formik } from 'formik';
-import { FC, ReactElement, VFC } from 'react';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as yup from 'yup';
-import { PropertyInput, PropertyTypes } from '../types';
+import type { FieldProps } from 'formik';
+import type { FC, ReactElement, VFC } from 'react';
+import type { PropertyInput, PropertyTypes } from '../types';
 
 type Props = {
   cancelButtonText?: string;
@@ -30,7 +31,7 @@ type Values = {
   bedrooms: number;
 };
 
-type FieldComponent = VFC;
+type FieldComponent = VFC<{ readOnly?: boolean }>;
 
 const noop = () => undefined;
 
@@ -73,10 +74,10 @@ const PropertyForm: VFC<Props> = ({
       validationSchema={validationSchema}
     >
       <Form noValidate>
-        <AddressField />
+        <AddressField readOnly={disabled} />
         <div className="sm:flex sm:justify-between">
-          <TypeField />
-          <BedroomsField />
+          <TypeField readOnly={disabled} />
+          <BedroomsField readOnly={disabled} />
         </div>
         <FormControls
           cancelButtonIcon={cancelButtonIcon}
@@ -149,7 +150,7 @@ const FormControls: VFC<
   );
 };
 
-const AddressField: FieldComponent = () => {
+const AddressField: FieldComponent = ({ readOnly = false }) => {
   return (
     <div className="form-field">
       <Field name="address">
@@ -158,6 +159,7 @@ const AddressField: FieldComponent = () => {
             fullWidth
             id="address"
             inputProps={{
+              readOnly,
               'aria-errormessage': 'address-error',
             }}
             label="Address"
@@ -175,7 +177,7 @@ const AddressField: FieldComponent = () => {
   );
 };
 
-const TypeField: FieldComponent = () => {
+const TypeField: FieldComponent = ({ readOnly = false }) => {
   return (
     <div className="form-field form-field--half form-field--first">
       <Field name="type">
@@ -198,6 +200,7 @@ const TypeField: FieldComponent = () => {
               autoWidth
               id="type"
               inputProps={{
+                readOnly,
                 'aria-errormessage': 'type-error',
               }}
               label="Type"
@@ -219,7 +222,7 @@ const TypeField: FieldComponent = () => {
   );
 };
 
-const BedroomsField: FieldComponent = () => {
+const BedroomsField: FieldComponent = ({ readOnly }) => {
   return (
     <div className="form-field form-field--half form-field--last">
       <Field name="bedrooms">
@@ -228,6 +231,7 @@ const BedroomsField: FieldComponent = () => {
             fullWidth
             id="bedrooms"
             inputProps={{
+              readOnly,
               'aria-errormessage': 'bedrooms-error',
               min: 1,
               max: 20,

@@ -1,7 +1,7 @@
 import { List, ListItem } from '@mui/material';
-import { VFC } from 'react';
-import { PropertyDocument } from '../types';
 import { Property } from './Property';
+import type { VFC } from 'react';
+import type { PropertyDocument } from '../types';
 
 type Props = {
   properties?: Array<PropertyDocument>;

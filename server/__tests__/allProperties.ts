@@ -1,5 +1,4 @@
-import { ApolloServer, gql } from 'apollo-server';
-import { PropertyFields } from '../src/types';
+import { gql } from 'apollo-server';
 import {
   addPropertiesToDatabase,
   clearDatabase,
@@ -8,6 +7,8 @@ import {
   createApolloServer,
   resetIdIncrement,
 } from './__utils__/utils';
+import type { ApolloServer } from 'apollo-server';
+import type { PropertyFields } from '../src/types';
 
 const query = gql`
   query {

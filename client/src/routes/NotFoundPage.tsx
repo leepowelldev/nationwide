@@ -1,8 +1,8 @@
-import { VFC } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { Link as MuiLink } from '@mui/material';
 import { Layout } from '../components/Layout';
+import type { VFC } from 'react';
 
 const NotFoundPage: VFC = () => {
   return (

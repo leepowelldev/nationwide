@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
 import { MongoDataSource } from 'apollo-datasource-mongodb';
 import { UserInputError } from 'apollo-server-errors';
-import { PropertyDocument, PropertyFields } from './types';
 import { Property } from './propertyModel';
 import { NotFoundError } from './errors';
+import type { PropertyDocument, PropertyFields } from './types';
 
 class PropertiesDataSource extends MongoDataSource<PropertyDocument> {
   async get(id: string): Promise<PropertyDocument> {

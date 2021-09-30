@@ -24,9 +24,15 @@
   "rules": {
     "import/order": [
       "error",
-      { "groups": ["builtin", "external", "parent", "sibling", "index"] }
+      {
+        "groups": ["builtin", "external", "parent", "sibling", "index", "type"]
+      }
     ],
     "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/consistent-type-imports": [
+      "error",
+      { "prefer": "type-imports" }
+    ],
     "react/prop-types": "off",
     // Vite injects React into scope at compile
     "react/react-in-jsx-scope": "off",

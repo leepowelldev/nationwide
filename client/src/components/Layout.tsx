@@ -1,8 +1,8 @@
-import { FC } from 'react';
 import { Container, LinearProgress } from '@mui/material';
 import { Helmet } from 'react-helmet';
 import logo from '../logo.svg';
 import { LinearProgressPlaceholder } from './LinearProgressPlaceholder';
+import type { FC } from 'react';
 
 type Props = {
   showGlobalLoading?: boolean;

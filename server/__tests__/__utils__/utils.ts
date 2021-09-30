@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import mongoose, { ConnectOptions } from 'mongoose';
+import mongoose from 'mongoose';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import { ApolloServer } from 'apollo-server';
-import { Collection } from 'apollo-datasource-mongodb';
 import { PropertiesDataSource } from '../../src/propertiesDataSource';
 import { resolvers, typeDefs } from '../../src/schema';
-import { PropertyDocument, PropertyFields } from '../../src/types';
 import { Property } from '../../src/propertyModel';
+import type { PropertyDocument, PropertyFields } from '../../src/types';
+import type { Collection } from 'apollo-datasource-mongodb';
+import type { ConnectOptions } from 'mongoose';
 
 let mongod: MongoMemoryServer;
 

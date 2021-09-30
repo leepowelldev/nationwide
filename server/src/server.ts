@@ -1,10 +1,10 @@
 import { ApolloServer } from 'apollo-server';
-import { Collection } from 'apollo-datasource-mongodb';
 import { resolvers, typeDefs } from './schema';
 import { PropertiesDataSource } from './propertiesDataSource';
 import { Property } from './propertyModel';
-import { PropertyDocument } from './types';
 import { init } from './database';
+import type { PropertyDocument } from './types';
+import type { Collection } from 'apollo-datasource-mongodb';
 
 init().then(() => {
   const server = new ApolloServer({

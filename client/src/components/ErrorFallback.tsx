@@ -1,7 +1,7 @@
-import { VFC } from 'react';
-import { FallbackProps } from 'react-error-boundary';
 import { Helmet } from 'react-helmet';
 import { Layout } from './Layout';
+import type { VFC } from 'react';
+import type { FallbackProps } from 'react-error-boundary';
 
 type Props = FallbackProps;
 

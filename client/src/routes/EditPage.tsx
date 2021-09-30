@@ -1,14 +1,15 @@
 import { useMutation, useQuery } from '@apollo/client';
 import { Save } from '@mui/icons-material';
 import { Link as MuiLink } from '@mui/material';
-import { VFC, useEffect } from 'react';
+import { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { useHistory } from 'react-router';
 import { Link, useParams } from 'react-router-dom';
 import { Layout } from '../components/Layout';
 import { PropertyForm } from '../components/PropertyForm';
 import { GET_PROPERTY, UPDATE_PROPERTY } from '../queries';
-import { PropertyDocument, PropertyInput } from '../types';
+import type { VFC } from 'react';
+import type { PropertyDocument, PropertyInput } from '../types';
 
 type QueryData = {
   getProperty: PropertyDocument;

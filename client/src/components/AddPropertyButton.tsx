@@ -1,6 +1,6 @@
 import { Add } from '@mui/icons-material';
 import { Fab } from '@mui/material';
-import { MouseEventHandler, VFC } from 'react';
+import type { MouseEventHandler, VFC } from 'react';
 
 type Props = {
   onClick: MouseEventHandler;

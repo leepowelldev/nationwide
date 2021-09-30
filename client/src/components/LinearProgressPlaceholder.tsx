@@ -1,4 +1,4 @@
-import { VFC } from 'react';
+import type { VFC } from 'react';
 
 const LinearProgressPlaceholder: VFC = () => <div className="h-4px"></div>;
 

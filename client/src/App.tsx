@@ -1,6 +1,6 @@
-import { VFC } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { CreatePage, EditPage, HomePage, NotFoundPage } from './routes';
+import type { VFC } from 'react';
 import './styles/global.css';
 
 const App: VFC = () => {

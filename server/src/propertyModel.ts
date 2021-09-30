@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { PropertyFields } from './types';
+import type { PropertyFields } from './types';
 
 const schema = new mongoose.Schema<PropertyFields>({
   address: {
